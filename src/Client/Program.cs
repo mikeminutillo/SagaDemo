@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using NServiceBus;
 
 class Program
@@ -9,11 +10,15 @@ class Program
     {
         Console.Title = "Client";
 
+        var config = new ConfigurationBuilder().AddJsonFile("local.settings.json", false)
+            .Build();
+
         var endpointConfiguration = new EndpointConfiguration("Client");
         endpointConfiguration.SendOnly();
         endpointConfiguration.EnableInstallers();
 
-        var transport = endpointConfiguration.UseTransport<LearningTransport>();
+        var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
+        transport.ConnectionString(config.GetValue<string>("Values:AzureWebJobsServiceBus"));
 
         var routing = transport.Routing();
         routing.RouteToEndpoint(typeof(SubmitOrder), "Sales");
