@@ -1,15 +1,18 @@
 ﻿//using System.Threading.Tasks;
 //using NServiceBus;
 //using NServiceBus.Logging;
+//using NServiceBus.Persistence.Sql;
 
-//class OfferDiscountForRepeatCustomersData : ContainSagaData
+//[assembly: SqlPersistenceSettings(MsSqlServerScripts = true)]
+
+//public class OfferDiscountForRepeatCustomersData : ContainSagaData
 //{
 //    public string CustomerId { get; set; }
 //    public bool DiscountOfferSent { get; set; }
 //    public int OrderCount { get; set; }
 //}
 
-//class OfferDiscountForRepeatCustomersSaga : Saga<OfferDiscountForRepeatCustomersData>, IAmStartedByMessages<OrderAccepted>
+//public class OfferDiscountForRepeatCustomersSaga : Saga<OfferDiscountForRepeatCustomersData>, IAmStartedByMessages<OrderAccepted>
 //{
 //    protected override void ConfigureHowToFindSaga(SagaPropertyMapper<OfferDiscountForRepeatCustomersData> mapper)
 //    {
@@ -25,7 +28,7 @@
 //        if (Data.OrderCount >= 5 && Data.DiscountOfferSent == false)
 //        {
 //            log.Info($"{Data.CustomerId} has exceeded the threshold required to receive a discount offer. Sending...");
-//            await context.Send(new OfferDiscountCode { CustomerId = Data.CustomerId }); 
+//            await context.Send(new OfferDiscountCode { CustomerId = Data.CustomerId });
 //            Data.DiscountOfferSent = true;
 //        }
 //    }

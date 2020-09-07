@@ -1,6 +1,8 @@
 ﻿using NServiceBus;
 using System;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 class Program
 {
@@ -8,10 +10,18 @@ class Program
     {
         Console.Title = "Sales";
 
-        var endpointConfiguration = new EndpointConfiguration("Sales");
+        var config = new ConfigurationBuilder().AddJsonFile("local.settings.json", false)
+            .Build();
 
-        endpointConfiguration.UseTransport<LearningTransport>();
-        endpointConfiguration.UsePersistence<LearningPersistence>();
+        var endpointConfiguration = new EndpointConfiguration("Sales");
+        endpointConfiguration.EnableInstallers();
+
+        var transport = endpointConfiguration.UseTransport<AzureServiceBusTransport>();
+        transport.ConnectionString(config.GetValue<string>("Values:AzureWebJobsServiceBus"));
+
+        var persistence = endpointConfiguration.UsePersistence<SqlPersistence>();
+        persistence.SqlDialect<SqlDialect.MsSqlServer>();
+        persistence.ConnectionBuilder(() => new SqlConnection(config.GetValue<string>("Values:NServiceBusData")));
 
         endpointConfiguration.SendFailedMessagesTo("error");
         endpointConfiguration.AuditProcessedMessagesTo("audit");

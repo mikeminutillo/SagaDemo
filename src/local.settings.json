@@ -1,0 +1,7 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsServiceBus": "YOUR ASQ CONNECTION STRING",
+    "NServiceBusData": "YOUR NSERVICEBUS SQL DATABASE CONNECTION STRING"
+  } 
+}
