@@ -95,5 +95,5 @@
 //        });
 //    }
 
-//    private readonly ILog log = LogManager.GetLogger<OrderHandler>();
+//    private readonly ILog log = LogManager.GetLogger<BuyersRemorsePolicy>();
 //}

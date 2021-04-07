@@ -9,7 +9,8 @@
 //    public int OrderCount { get; set; }
 //}
 
-//class OfferDiscountForRepeatCustomersSaga : Saga<OfferDiscountForRepeatCustomersData>, IAmStartedByMessages<OrderAccepted>
+//class OfferDiscountForRepeatCustomersSaga : Saga<OfferDiscountForRepeatCustomersData>, 
+//    IAmStartedByMessages<OrderAccepted>
 //{
 //    protected override void ConfigureHowToFindSaga(SagaPropertyMapper<OfferDiscountForRepeatCustomersData> mapper)
 //    {
@@ -25,7 +26,7 @@
 //        if (Data.OrderCount >= 5 && Data.DiscountOfferSent == false)
 //        {
 //            log.Info($"{Data.CustomerId} has exceeded the threshold required to receive a discount offer. Sending...");
-//            await context.Send(new OfferDiscountCode { CustomerId = Data.CustomerId }); 
+//            await context.Send(new OfferDiscountCode { CustomerId = Data.CustomerId });
 //            Data.DiscountOfferSent = true;
 //        }
 //    }
