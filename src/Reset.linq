@@ -4,7 +4,10 @@ var rootFolder = Path.GetDirectoryName(Util.CurrentQueryPath).Dump("Cleaning up"
 
 var patterns = new[] {
 	".sagas",
-	".learningtransport"
+	".learningtransport",
+	".db",
+	".audit-db",
+	".logs"
 };
 
 foreach (var pattern in patterns)

@@ -15,6 +15,7 @@ class Program
 
         endpointConfiguration.SendFailedMessagesTo("error");
         endpointConfiguration.AuditProcessedMessagesTo("audit");
+        endpointConfiguration.AuditSagaStateChanges("audit");
 
         endpointConfiguration.Recoverability().AddUnrecoverableException<NotImplementedException>();
 

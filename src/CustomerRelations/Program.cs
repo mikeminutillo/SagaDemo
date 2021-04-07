@@ -20,6 +20,7 @@ class Program
 
         endpointConfiguration.SendFailedMessagesTo("error");
         endpointConfiguration.AuditProcessedMessagesTo("audit");
+        endpointConfiguration.AuditSagaStateChanges("audit");
 
         var endpoint = await Endpoint.Start(endpointConfiguration);
 
